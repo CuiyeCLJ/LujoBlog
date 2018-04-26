@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljfu.lujorblog.mapper.CommentMapper">
+
+    <resultMap id="CommentAll" type="com.ljfu.lujorblog.domain.Comment" >
+        <id column="commentId" property="commentId" />
+        <result column="commentPid" property="commentPid" />
+        <result column="userId" property="userId" />
+        <result column="articleId" property="articleId" />
+        <result column="commentContent" property="commentContent" />
+        <result column="commentCreationTime" property="commentCreationTime" />
+        <result column="commentStatus" property="commentStatus" />
+    </resultMap>
+
+    <sql id="CommentColumn" >
+        commentId, commentPid, userId, articleId,
+        commentContent, commentCreationTime, commentStatus
+    </sql>
+
+    <insert id="insertComment" parameterType="com.ljfu.lujorblog.domain.Comment" >
+        insert into comment (commentId, commentPid, userId, articleId,
+            commentContent, commentCreationTime, commentStatus)
+        values (#{commentId}, #{commentPid}, #{userId}, #{articleId},
+            #{commentContent}, #{commentCreationTime}, #{commentStatus})
+    </insert>
+
+    <insert id="insertCommentSel" parameterType="com.ljfu.lujorblog.domain.Comment" >
+        insert into comment
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="commentId != null" >
+                commentId,
+            </if>
+            <if test="commentPid != null" >
+                commentPid,
+            </if>
+            <if test="userId != null" >
+                userId,
+            </if>
+            <if test="articleId != null" >
+                articleId,
+            </if>
+            <if test="commentContent != null" >
+                commentContent,
+            </if>
+            <if test="commentCreationTime != null" >
+                commentCreationTime,
+            </if>
+            <if test="commentStatus != null" >
+                commentStatus,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="commentId != null" >
+                #{commentId},
+            </if>
+            <if test="commentPid != null" >
+                #{commentPid},
+            </if>
+            <if test="userId != null" >
+                #{userId},
+            </if>
+            <if test="articleId != null" >
+                #{articleId},
+            </if>
+            <if test="commentContent != null" >
+                #{commentContent},
+            </if>
+            <if test="commentCreationTime != null" >
+                #{commentCreationTime},
+            </if>
+            <if test="commentStatus != null" >
+                #{commentStatus},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from comment
+        where commentId = #{commentId}
+    </delete>
+
+    <select id="selectArticleComment" resultType="com.ljfu.lujorblog.domain.Comment" >
+        select <include refid="CommentColumn" />
+        from comment
+        where articleId = #{articleId}
+        order by commentCreationTime desc
+    </select>
+
+    <select id="selectChildComment" resultType="com.ljfu.lujorblog.domain.Comment" >
+        select <include refid="CommentColumn" />
+        from comment
+        where commentPid = #{commentId}
+    </select>
+
+    <update id="updateComment" parameterType="com.ljfu.lujorblog.domain.Comment" >
+        update comment
+        set commentPid = #{commentPid},
+            userId = #{userId},
+            articleId = #{userId},
+            commentContent = #{commentContent},
+            commentCreationTime = #{commentCreationTime},
+            commentStatus = #{commentStatus}
+        where commentId = #{commentId}
+    </update>
+
+</mapper>

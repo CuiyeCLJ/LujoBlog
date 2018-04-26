@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljfu.lujorblog.mapper.TagMapper">
+
+    <resultMap id="TagAll" type="com.ljfu.lujorblog.domain.Tag" >
+        <id column="tagId" property="tagId" />
+        <result column="tagName" property="tagName" />
+        <result column="tagDescription" property="tagDescription" />
+        <result column="tagStatus" property="tagStatus" />
+    </resultMap>
+
+    <insert id="insertTag" parameterType="com.ljfu.lujorblog.domain.Tag" >
+        insert into tag (tagId, tagName, tagDescription, tagStatus)
+        values (#{tagId}, #{tagName}, #{tagDescription}, #{tagStatus})
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tag
+        where tagId = #{tagId};
+    </delete>
+
+    <select id="selectByPrimaryKey" resultMap="TagAll" parameterType="java.lang.Integer" >
+        select * from tag
+        where tagId = #{tagId};
+    </select>
+
+    <select id="selectAllTag" resultType="com.ljfu.lujorblog.domain.Tag" >
+        select * from tag
+        order by tagId asc;
+    </select>
+
+    <update id="updateTag" parameterType="com.ljfu.lujorblog.domain.Tag" >
+        update tag set tagName = #{tagName}, tagDescription = #{tagDescription},
+            tagStatus = #{tagStatus}
+        where tagId = #{tagId};
+    </update>
+
+</mapper>

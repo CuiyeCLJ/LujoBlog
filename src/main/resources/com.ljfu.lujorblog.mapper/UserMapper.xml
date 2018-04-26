@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljfu.lujorblog.mapper.UserMapper">
+
+    <resultMap id="UserAll" type="com.ljfu.lujorblog.domain.User" >
+        <id column="userId" property="userId" />
+        <result column="userName" property="userName" />
+        <result column="userNickname" property="userNickname" />
+        <result column="userPassword" property="userPassword" />
+        <result column="userEmail" property="userEmail" />
+        <result column="userAvatar" property="userAvatar" />
+        <result column="userRegTime" property="userRegTime" />
+        <result column="userStatus" property="userStatus" />
+    </resultMap>
+    
+    <insert id="insertUser" parameterType="com.ljfu.lujorblog.domain.User">
+        insert into user (userId, userName, userNickname, userPassword,
+            userEmail, userAvatar, userRegTime, userStatus)
+        values (#{userId}, #{userName}, #{userNickname}, #{userPassword},
+            #{userEmail}, #{userAvatar}, #{userRegTime}, #{userRegTime});
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from user
+        where userId = #{userId};
+    </delete>
+
+    <select id="selectAllUser" resultType="com.ljfu.lujorblog.domain.User">
+        select * from user
+        from userId asc ;
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" >
+        select * from user
+        where userId = #{userId};
+    </select>
+
+    <update id="updateUser" parameterType="com.ljfu.lujorblog.domain.User" >
+        update user
+        set userName = #{userName},
+            userNickname = #{userNickname},
+            userPassword = #{userPassword},
+            userEmail = #{userEmail},
+            userAvatar = #{userAvatar},
+            userRegTime = #{userRegTime},
+            userStatus = #{userStatus}
+        where userId = #{userId}
+    </update>
+
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljfu.lujorblog.mapper.CategoryMapper">
+
+    <resultMap id="Category" type="com.ljfu.lujorblog.domain.Category" >
+        <id column="categoryId" property="categoryId" />
+        <result column="categoryName" property="categoryName" />
+        <result column="categoryDescription" property="categoryDescription" />
+        <result column="categoryStatus" property="categoryStatus" />
+    </resultMap>
+
+    <sql id="CategoryAllColumn" >
+        categoryId, categoryName, categoryDescription, categoryStatus
+    </sql>
+
+    <insert id="insertCategory" parameterType="com.ljfu.lujorblog.domain.Category" >
+        insert into category (categoryId, categoryName,
+            categoryDescription, categoryStatus)
+        values (#{categoryId}, #{categoryName},
+            #{categoryDescription}, #{categoryStatus})
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from category
+        where categoryId = #{categoryId}
+    </delete>
+
+    <select id="selectAllCategory" resultType="com.ljfu.lujorblog.domain.Category" >
+        select <include refid="CategoryAllColumn" />
+        from category
+        order by categoryId asc
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="Category" parameterType="java.lang.Integer" >
+        select <include refid="CategoryAllColumn" />
+        from category
+        where categoryId = #{categoryId}
+    </select>
+
+    <update id="updateCategory" parameterType="com.ljfu.lujorblog.domain.Category" >
+        update category
+        set categoryName = #{categoryName},
+          categoryDescription = #{categoryDescription},
+          categoryStatus = #{categoryStatus}
+        where categoryId = #{categoryId}
+    </update>
+
+    <update id="updateCategorySelective" parameterType="com.ljfu.lujorblog.domain.Category" >
+        update category
+        <set>
+            <if test="categoryName != null" >
+                categoryName = #{categoryName},
+            </if>
+            <if test="categoryDescription != null" >
+                categoryDescription = #{categoryDescription},
+            </if>
+            <if test="categoryStatus != null" >
+                categoryStatus = #{categoryStatus},
+            </if>
+        </set>
+        where categoryId = #{categoryId}
+    </update>
+
+</mapper>
