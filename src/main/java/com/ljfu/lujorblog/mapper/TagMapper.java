@@ -12,13 +12,13 @@ public interface TagMapper {
 
     int insertTag(Tag tag);
 
-    int deleteByPrimaryKey(Integer tagId);
+    int deleteByTagId(Integer tagId);
 
-    Tag selectByPrimaryKey(Integer tagId);
+    Tag selectByTagId(Integer tagId);
 
     List<Tag> selectAllTag();
 
-    List<Tag> getArticleTagList(Integer articleId);
+    List<Tag> selectTagsByArticleId(Integer articleId);
 
     int updateTag(Tag tag);
 }

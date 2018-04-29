@@ -1,6 +1,7 @@
 package com.ljfu.lujorblog.domain;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Lifu.Zheng
@@ -12,7 +13,7 @@ public class Comment {
 
     private Integer commentPid;
 
-    private Integer userId;
+//    private Integer userId;
 
     private Integer articleId;
 
@@ -21,6 +22,26 @@ public class Comment {
     private Date commentCreationTime;
 
     private Integer commentStatus;
+
+//    private Article article;
+
+    private User user;
+
+//    public Article getArticle() {
+//        return article;
+//    }
+//
+//    public void setArticle(Article article) {
+//        this.article = article;
+//    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getCommentId() {
         return commentId;
@@ -38,14 +59,14 @@ public class Comment {
         this.commentPid = commentPid;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
+//    public Integer getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Integer userId) {
+//        this.userId = userId;
+//    }
+//
     public Integer getArticleId() {
         return articleId;
     }

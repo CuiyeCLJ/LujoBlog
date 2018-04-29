@@ -1,5 +1,7 @@
 package com.ljfu.lujorblog.domain;
 
+import java.util.List;
+
 /**
  * @author Lifu.Zheng
  * @data 2018.04.20 14:54
@@ -13,6 +15,16 @@ public class Tag {
     private String tagDescription;
 
     private Integer tagStatus;
+
+    private List<Article> articles;
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
 
     public Integer getTagId() {
         return tagId;

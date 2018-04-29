@@ -6,11 +6,21 @@
     <resultMap id="CommentAll" type="com.ljfu.lujorblog.domain.Comment" >
         <id column="commentId" property="commentId" />
         <result column="commentPid" property="commentPid" />
-        <result column="userId" property="userId" />
+        <!--<result column="userId" property="userId" />-->
         <result column="articleId" property="articleId" />
         <result column="commentContent" property="commentContent" />
         <result column="commentCreationTime" property="commentCreationTime" />
         <result column="commentStatus" property="commentStatus" />
+        <association property="user" column="userId" javaType="com.ljfu.lujorblog.domain.User" >
+            <id property="userId" column="userId" />
+            <result property="userName" column="userName" />
+            <result property="userNickname" column="userNickname" />
+            <result property="userPassword" column="userPassword" />
+            <result property="userEmail" column="userEmail" />
+            <result property="userAvatar" column="userAvatar" />
+            <result property="userRegTime" column="userRegTime" />
+            <result property="userStatus" column="userStatus" />
+        </association>
     </resultMap>
 
     <sql id="CommentColumn" >
@@ -75,16 +85,22 @@
         </trim>
     </insert>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByCommentId" parameterType="java.lang.Integer" >
         delete from comment
         where commentId = #{commentId}
     </delete>
 
-    <select id="selectArticleComment" resultType="com.ljfu.lujorblog.domain.Comment" >
+    <select id="selectCommentByArticleId" resultType="com.ljfu.lujorblog.domain.Comment" >
         select <include refid="CommentColumn" />
         from comment
         where articleId = #{articleId}
         order by commentCreationTime desc
+    </select>
+
+    <select id="selectCommentByCommentId" resultType="com.ljfu.lujorblog.domain.Comment" >
+        select *
+        from comment
+        where commentId = #{commentId}
     </select>
 
     <select id="selectChildComment" resultType="com.ljfu.lujorblog.domain.Comment" >
@@ -97,7 +113,7 @@
         update comment
         set commentPid = #{commentPid},
             userId = #{userId},
-            articleId = #{userId},
+            articleId = #{articleId},
             commentContent = #{commentContent},
             commentCreationTime = #{commentCreationTime},
             commentStatus = #{commentStatus}

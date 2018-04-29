@@ -12,11 +12,11 @@ public interface CategoryMapper {
 
     void insertCategory(Category category);
 
-    void deleteByPrimaryKey(Integer categoryId);
+    void deleteByCategoryId(Integer categoryId);
 
     List<Category> selectAllCategory();
 
-    Category selectByPrimaryKey(Integer categoryId);
+    Category selectByCategoryId(Integer categoryId);
 
     int updateCategory(Category category);
 

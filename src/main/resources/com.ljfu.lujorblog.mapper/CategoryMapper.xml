@@ -21,7 +21,7 @@
             #{categoryDescription}, #{categoryStatus})
     </insert>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByCategoryId" parameterType="java.lang.Integer" >
         delete from category
         where categoryId = #{categoryId}
     </delete>
@@ -32,7 +32,7 @@
         order by categoryId asc
     </select>
 
-    <select id="selectByPrimaryKey" resultMap="Category" parameterType="java.lang.Integer" >
+    <select id="selectByCategoryId" parameterType="java.lang.Integer" resultMap="Category">
         select <include refid="CategoryAllColumn" />
         from category
         where categoryId = #{categoryId}

@@ -8,6 +8,11 @@
         <result column="tagName" property="tagName" />
         <result column="tagDescription" property="tagDescription" />
         <result column="tagStatus" property="tagStatus" />
+        <!--<collection property="articles" column="tagId" javaType="ArrayList"-->
+                    <!--ofType="com.ljfu.lujorblog.domain.Article"-->
+                    <!--select="com.ljfu.lujorblog.mapper.ArticleMapper.selectArticlesByTagId"-->
+                    <!--fetchType="lazy" >-->
+        <!--</collection>-->
     </resultMap>
 
     <insert id="insertTag" parameterType="com.ljfu.lujorblog.domain.Tag" >
@@ -15,7 +20,7 @@
         values (#{tagId}, #{tagName}, #{tagDescription}, #{tagStatus})
     </insert>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByTagId" parameterType="java.lang.Integer" >
         delete from tag
         where tagId = #{tagId};
     </delete>
@@ -28,6 +33,16 @@
     <select id="selectAllTag" resultType="com.ljfu.lujorblog.domain.Tag" >
         select * from tag
         order by tagId asc;
+    </select>
+    
+    <select id="selectTagsByArticleId" parameterType="java.lang.Integer"
+            resultType="com.ljfu.lujorblog.domain.Tag" >
+        select * from tag
+        where tagId in (
+            select tagId
+            from articletotag
+            where articleId = #{articleId};
+        )
     </select>
 
     <update id="updateTag" parameterType="com.ljfu.lujorblog.domain.Tag" >

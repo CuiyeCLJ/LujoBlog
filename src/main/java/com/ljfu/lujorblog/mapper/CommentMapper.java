@@ -14,12 +14,12 @@ public interface CommentMapper {
 
     int insertCommentSel(Comment comment);
 
-    int deleteByPrimaryKey(Integer commentId);
+    int deleteByCommentId(Integer commentId);
 
     //获取文章的评论
-    List<Comment> selectArticleComment(Integer articleId);
+    List<Comment> selectCommentByArticleId(Integer articleId);
 
-//    Comment selectByPrimaryKey(Integer commentId);
+    Comment selectCommentByCommentId(Integer commentId);
     //获取评论的子评论
     List<Comment> selectChildComment(Integer commentId);
 

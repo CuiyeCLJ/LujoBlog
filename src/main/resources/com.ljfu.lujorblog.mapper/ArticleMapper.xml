@@ -5,13 +5,41 @@
 
     <resultMap id="ArticleBase" type="com.ljfu.lujorblog.domain.Article" >
         <id column="articleId" property="" />
-        <result column="userId" property="userId"/>
+        <!--<result column="userId" property="userId"/>-->
         <result column="categoryId" property="categoryId"/>
         <result column="articleTitle" property="articleTitle"/>
         <result column="articleSummary" property="articleSummary" />
         <result column="articleCreationTime" property="articleCreationTime"/>
         <result column="articleUpdateTime" property="articleUpdateTime"/>
         <result column="articleStatus" property="articleStatus"/>
+        <!--文章与用户之间的多对一关联映射:association-->
+        <association property="user" column="userId" javaType="com.ljfu.lujorblog.domain.User">
+            <id property="userId" column="userId" />
+            <result property="userName" column="userName" />
+            <result property="userNickname" column="userNickname" />
+            <result property="userPassword" column="userPassword" />
+            <result property="userEmail" column="userEmail" />
+            <result property="userAvatar" column="userAvatar" />
+            <result property="userRegTime" column="userRegTime" />
+            <result property="userStatus" column="userStatus" />
+        </association>
+        <!--文章与分类的多对一关联映射-->
+        <association property="category" column="categoryId" javaType="com.ljfu.lujorblog.domain.Category" >
+            <id property="categoryId" column="categoryId" />
+            <result property="categoryName" column="categoryName" />
+            <result property="categoryDescription" column="categoryDescription" />
+            <result property="categoryStatus" column="categoryStatus" />
+        </association>
+        <!--文章与标签之间的多对多关联映射:collection-->
+        <collection property="tags" column="articleId" javaType="ArrayList"
+                     ofType="com.ljfu.lujorblog.domain.Tag"
+                    select="com.ljfu.lujorblog.mapper.TagMapper.selectTagsByArticleId"
+                    fetchType="lazy" >
+            <id property="tagId" column="tagId" />
+            <result property="tagName" column="tagName" />
+            <result property="tagDescription" column="tagDescription" />
+            <result property="tagStatus" column="tagStatus" />
+        </collection>
     </resultMap>
 
     <resultMap id="ArticleBlog" type="com.ljfu.lujorblog.domain.Article" extends="ArticleBase">
@@ -29,17 +57,17 @@
 
     <insert id="save" parameterType="com.ljfu.lujorblog.domain.Article" >
       insert into article (articleId, userId, categoryId, articleTitle,
-      articleContent, articleCreationTime, articleUpdateTime, articleStatus)
+        articleContent, articleCreationTime, articleUpdateTime, articleStatus)
       value (#{articleId}, #{userId}, #{categoryId}, #{articleTitle},
-       #{articleContent}, #{articleCreationTime}, #{articleUpdateTime}, #{articleStatus})
+        #{articleContent}, #{articleCreationTime}, #{articleUpdateTime}, #{articleStatus})
     </insert>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByArticleId" parameterType="java.lang.Integer" >
         delete from article
         where articleId = #{articleId}
     </delete>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ArticleBlog" >
+    <select id="selectByArticleId" parameterType="java.lang.Integer" resultMap="ArticleBlog" >
         select
             <include refid="BaseColumnList" />,
             <include refid="BlogColumnList" />
@@ -47,14 +75,44 @@
         where articleId = #{articleId}
     </select>
 
-    <select id="selectAllArticle" parameterType="map" resultMap="ArticleBase" >
-        select
-            <include refid="BaseColumnList" />
+    <select id="selectAllArticle" resultMap="ArticleBase" >
+        select <include refid="BaseColumnList" />
         from article
-        order by desc
+        order by articleId desc;
     </select>
 
-    <select id="selectArticleList" parameterType="map" />
+    <select id="selectArticlesByCategoryId" parameterType="java.lang.Integer"
+            resultMap="ArticleBase" >
+        select <include refid="BaseColumnList" />
+        from article
+        WHERE categoryId = #{categoryId};
+    </select>
+
+    <select id="selectArticlesByTagId" parameterType="java.lang.Integer" resultMap="ArticleBase" >
+        select <include refid="BaseColumnList" />
+        from article
+        where articleId in (
+            select articleId
+            from articletotag
+            where tagId = #{tagId}
+        )
+    </select>
+
+    <select id="selectPreArticle" parameterType="java.lang.Integer" resultMap="ArticleBlog" >
+        select *
+        from article
+        where articleId > #{articleId}
+        order by articleId
+        limit 1;
+    </select>
+
+    <select id="selectLatArticle" parameterType="java.lang.Integer" resultMap="ArticleBlog" >
+        select *
+        from article
+        where articleId &lt; #{articleId}
+        order by articleId
+        limit 1;
+    </select>
 
     <update id="update" parameterType="com.ljfu.lujorblog.domain.Article" >
         update article

@@ -1,6 +1,5 @@
 package com.ljfu.lujorblog.domain;
 
-import javax.validation.constraints.Null;
 import java.util.Date;
 import java.util.List;
 
@@ -12,11 +11,9 @@ public class Article {
 
     private Integer articleId;
 
-    private Integer userId;
+//    private Integer userId;
 
-    private Integer categoryId;
-
-    private List<Tag> tagList;
+//    private Integer categoryId;
 
     private String articleTitle;
 
@@ -30,6 +27,38 @@ public class Article {
 
     private Integer articleStatus;
 
+    private User user;
+
+    private Category category;
+
+    private List<Tag> tags;
+
+//    private List<Comment> comments;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public Integer getArticleId() {
         return articleId;
     }
@@ -38,28 +67,28 @@ public class Article {
         this.articleId = articleId;
     }
 
-    public Integer getUserId() {
-        return userId;
+//    public Integer getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Integer userId) {
+//        this.userId = userId;
+//    }
+//
+//    public Integer getCategoryId() {
+//        return categoryId;
+//    }
+//
+//    public void setCategoryId(Integer categoryId) {
+//        this.categoryId = categoryId;
+//    }
+
+    public List<Tag> getTags() {
+        return tags;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public List<Tag> getTagList() {
-        return tagList;
-    }
-
-    public void setTagList(List<Tag> tagList) {
-        this.tagList = tagList;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public String getArticleTitle() {

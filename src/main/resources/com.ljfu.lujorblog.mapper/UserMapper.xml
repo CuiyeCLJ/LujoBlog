@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ljfu.lujorblog.mapper.UserMapper">
 
-    <resultMap id="UserAll" type="com.ljfu.lujorblog.domain.User" >
+    <resultMap id="User" type="com.ljfu.lujorblog.domain.User" >
         <id column="userId" property="userId" />
         <result column="userName" property="userName" />
         <result column="userNickname" property="userNickname" />
@@ -21,17 +21,20 @@
             #{userEmail}, #{userAvatar}, #{userRegTime}, #{userRegTime});
     </insert>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-        delete from user
+    <delete id="deleteByUserId" parameterType="java.lang.Integer" >
+        delete
+        from user
         where userId = #{userId};
     </delete>
 
     <select id="selectAllUser" resultType="com.ljfu.lujorblog.domain.User">
-        select * from user
-        from userId asc ;
+        select *
+        from user
+        order by userId asc ;
     </select>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+            resultType="com.ljfu.lujorblog.domain.User" >
         select * from user
         where userId = #{userId};
     </select>
@@ -45,6 +48,34 @@
             userAvatar = #{userAvatar},
             userRegTime = #{userRegTime},
             userStatus = #{userStatus}
+        where userId = #{userId}
+    </update>
+
+    <update id="updateByUserIdSelective" parameterType="com.ljfu.lujorblog.domain.User" >
+        update user
+        <set>
+            <if test="userName != null">
+                userName = #{userName};
+            </if>
+            <if test="userNickname != null" >
+                userNickname = #{userNickname}
+            </if>
+            <if test="userPassword != null" >
+                userPassword = #{userPassword}
+            </if>
+            <if test="userEmail != null" >
+                userEmail = #{userEmail}
+            </if>
+            <if test="userAvatar != null" >
+                userAvatar = #{userAvatar}
+            </if>
+            <if test="userRegTime != null" >
+                userRegTime = #{userRegTime}
+            </if>
+            <if test="userStatus != null" >
+                userStatus = #{userStatus}
+            </if>
+        </set>
         where userId = #{userId}
     </update>
 

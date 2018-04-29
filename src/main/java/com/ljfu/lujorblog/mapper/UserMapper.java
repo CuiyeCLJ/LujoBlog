@@ -12,11 +12,13 @@ public interface UserMapper {
 
     int insertUser(User user);
 
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByUserId(Integer userId);
 
     List<User> selectAllUser();
 
-    User selectByPrimaryKey(Integer userId);
+    User selectByUserId(Integer userId);
 
     int updateUser(User user);
+
+    int updateByUserIdSelective(User user);
 }
