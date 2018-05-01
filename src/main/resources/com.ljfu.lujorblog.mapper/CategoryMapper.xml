@@ -5,20 +5,37 @@
 
     <resultMap id="Category" type="com.ljfu.lujorblog.domain.Category" >
         <id column="categoryId" property="categoryId" />
+        <result column="categoryPid" property="categoryPid" />
         <result column="categoryName" property="categoryName" />
         <result column="categoryDescription" property="categoryDescription" />
         <result column="categoryStatus" property="categoryStatus" />
     </resultMap>
 
     <sql id="CategoryAllColumn" >
-        categoryId, categoryName, categoryDescription, categoryStatus
+        categoryId, categoryPid, categoryName, categoryDescription, categoryStatus
     </sql>
 
     <insert id="insertCategory" parameterType="com.ljfu.lujorblog.domain.Category" >
-        insert into category (categoryId, categoryName,
-            categoryDescription, categoryStatus)
-        values (#{categoryId}, #{categoryName},
-            #{categoryDescription}, #{categoryStatus})
+        insert into category (categoryId, categoryName, categoryPid, categoryDescription, categoryStatus)
+        values (#{categoryId}, #{categoryPid}, #{categoryName}, #{categoryDescription}, #{categoryStatus})
+    </insert>
+
+    <insert id="insertCategoryIfNecessary" parameterType="com.ljfu.lujorblog.domain.Category" >
+        insert into category
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="categoryId != null">categoryId, </if>
+            <if test="categoryPid != null">categoryPid, </if>
+            <if test="categoryName != null">categoryName, </if>
+            <if test="categoryDescription != null">categoryDescription, </if>
+            <if test="categoryStatus != null">categoryStatus</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="categoryId != null">#{categoryId}, </if>
+            <if test="categoryPid != null">#{categoryPid}, </if>
+            <if test="categoryName != null">#{categoryName}, </if>
+            <if test="categoryDescription != null">#{categoryDescription}, </if>
+            <if test="categoryStatus != null">#{categoryStatus}</if>
+        </trim>
     </insert>
 
     <delete id="deleteByCategoryId" parameterType="java.lang.Integer" >
@@ -38,28 +55,30 @@
         where categoryId = #{categoryId}
     </select>
 
+    <select id="selectCategorysByCategoryPid" parameterType="java.lang.Integer" resultType="com.ljfu.lujorblog.domain.Category" >
+        select *
+        from category
+        where categoryPid = #{categoryPid};
+    </select>
+
     <update id="updateCategory" parameterType="com.ljfu.lujorblog.domain.Category" >
         update category
-        set categoryName = #{categoryName},
+        set categoryPid = #{categoryPid},
+          categoryName = #{categoryName},
           categoryDescription = #{categoryDescription},
           categoryStatus = #{categoryStatus}
-        where categoryId = #{categoryId}
+        where categoryId = #{categoryId};
     </update>
 
-    <update id="updateCategorySelective" parameterType="com.ljfu.lujorblog.domain.Category" >
+    <update id="updateCategoryIfNecessary" parameterType="com.ljfu.lujorblog.domain.Category" >
         update category
         <set>
-            <if test="categoryName != null" >
-                categoryName = #{categoryName},
-            </if>
-            <if test="categoryDescription != null" >
-                categoryDescription = #{categoryDescription},
-            </if>
-            <if test="categoryStatus != null" >
-                categoryStatus = #{categoryStatus},
-            </if>
+            <if test="categoryPid != null" >categoryPid = #{categoryPid}, </if>
+            <if test="categoryName != null" >categoryName = #{categoryName}, </if>
+            <if test="categoryDescription != null" >categoryDescription = #{categoryDescription}, </if>
+            <if test="categoryStatus != null" >categoryStatus = #{categoryStatus}</if>
         </set>
-        where categoryId = #{categoryId}
+        where categoryId = #{categoryId};
     </update>
 
 </mapper>

@@ -35,53 +35,25 @@
             #{commentContent}, #{commentCreationTime}, #{commentStatus})
     </insert>
 
-    <insert id="insertCommentSel" parameterType="com.ljfu.lujorblog.domain.Comment" >
+    <insert id="insertCommentIfNecessary" parameterType="com.ljfu.lujorblog.domain.Comment" >
         insert into comment
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="commentId != null" >
-                commentId,
-            </if>
-            <if test="commentPid != null" >
-                commentPid,
-            </if>
-            <if test="userId != null" >
-                userId,
-            </if>
-            <if test="articleId != null" >
-                articleId,
-            </if>
-            <if test="commentContent != null" >
-                commentContent,
-            </if>
-            <if test="commentCreationTime != null" >
-                commentCreationTime,
-            </if>
-            <if test="commentStatus != null" >
-                commentStatus,
-            </if>
+            <if test="commentId != null" >commentId, </if>
+            <if test="commentPid != null" >commentPid,</if>
+            <if test="userId != null" >userId,</if>
+            <if test="articleId != null" >articleId,</if>
+            <if test="commentContent != null" >commentContent, </if>
+            <if test="commentCreationTime != null" >commentCreationTime, </if>
+            <if test="commentStatus != null" >commentStatus</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="commentId != null" >
-                #{commentId},
-            </if>
-            <if test="commentPid != null" >
-                #{commentPid},
-            </if>
-            <if test="userId != null" >
-                #{userId},
-            </if>
-            <if test="articleId != null" >
-                #{articleId},
-            </if>
-            <if test="commentContent != null" >
-                #{commentContent},
-            </if>
-            <if test="commentCreationTime != null" >
-                #{commentCreationTime},
-            </if>
-            <if test="commentStatus != null" >
-                #{commentStatus},
-            </if>
+            <if test="commentId != null" >#{commentId},</if>
+            <if test="commentPid != null" >#{commentPid},</if>
+            <if test="userId != null" >#{userId},</if>
+            <if test="articleId != null" >#{articleId},</if>
+            <if test="commentContent != null" >#{commentContent},</if>
+            <if test="commentCreationTime != null" >#{commentCreationTime},</if>
+            <if test="commentStatus != null" >#{commentStatus}</if>
         </trim>
     </insert>
 
@@ -119,5 +91,24 @@
             commentStatus = #{commentStatus}
         where commentId = #{commentId}
     </update>
+
+    <update id="updateCommentIfNecessary" parameterType="com.ljfu.lujorblog.domain.Comment" >
+        update comment
+        <set>
+            <if test="commentPid != null" >commentPid = #{commentPid}, </if>
+            <if test="userId != null" >userId = #{userId}, </if>
+            <if test="articleId != null" >articleId = #{articleId}, </if>
+            <if test="commentContent != null" >commentContent = #{commentContent}, </if>
+            <if test="commentCreationTime != null" >commentCreationTime = #{commentCreationTime}, </if>
+            <if test="commentStatus != null" >commentStatus = #{commentStatus}</if>
+        </set>
+        where commentId = #{commentId};
+    </update>
+
+    <select id="countArticleComment" parameterType="java.lang.Integer" >
+        select count(*)
+        from comment
+        where articleId = #{articleId};
+    </select>
 
 </mapper>

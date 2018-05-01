@@ -16,6 +16,8 @@ public class User {
 
     private String userPassword;
 
+    private String userSex;
+
     private String userEmail;
 
     private String userAvatar;
@@ -54,6 +56,14 @@ public class User {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
+    }
+
+    public String getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
     }
 
     public String getUserEmail() {

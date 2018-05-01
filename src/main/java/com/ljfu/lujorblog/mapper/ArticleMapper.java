@@ -14,6 +14,8 @@ public interface ArticleMapper {
 
     int save(Article article);
 
+    int insertArticleIfNecessary(Article article);
+
     int deleteByArticleId(Integer articleId);
 
 //    获取一篇文章
@@ -36,5 +38,16 @@ public interface ArticleMapper {
 //    获取后一篇文章
     Article selectLatArticle(Integer articleId);
 
-    int update(Article article);
+    int updateArticle(Article article);
+
+    int updateArticleIfNecessary(Article article);
+
+//    获取总的文章数目
+    Integer countArticle();
+
+//    获取同一分类的文章数目
+    Integer countArticleByCategoryId(Integer categoryId);
+
+//    获取同一标签的文章数目
+    Integer countArticleByTagId(Integer tagId);
 }

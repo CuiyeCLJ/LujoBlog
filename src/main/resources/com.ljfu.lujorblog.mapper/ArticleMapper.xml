@@ -18,6 +18,7 @@
             <result property="userName" column="userName" />
             <result property="userNickname" column="userNickname" />
             <result property="userPassword" column="userPassword" />
+            <result property="userSex" column="userSex" />
             <result property="userEmail" column="userEmail" />
             <result property="userAvatar" column="userAvatar" />
             <result property="userRegTime" column="userRegTime" />
@@ -26,6 +27,7 @@
         <!--文章与分类的多对一关联映射-->
         <association property="category" column="categoryId" javaType="com.ljfu.lujorblog.domain.Category" >
             <id property="categoryId" column="categoryId" />
+            <result property="categoryPid" column="categoryPid" />
             <result property="categoryName" column="categoryName" />
             <result property="categoryDescription" column="categoryDescription" />
             <result property="categoryStatus" column="categoryStatus" />
@@ -60,6 +62,32 @@
         articleContent, articleCreationTime, articleUpdateTime, articleStatus)
       value (#{articleId}, #{userId}, #{categoryId}, #{articleTitle},
         #{articleContent}, #{articleCreationTime}, #{articleUpdateTime}, #{articleStatus})
+    </insert>
+
+    <insert id="insertArticleIfNecessary" parameterType="com.ljfu.lujorblog.domain.Article">
+        insert into article
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="articleId != null">articleId, </if>
+            <if test="userId != null">userId, </if>
+            <if test="categoryId != null">categoryId, </if>
+            <if test="articleTitle != null">articleTitle, </if>
+            <if test="articleSummary != null">articleSummary, </if>
+            <if test="articleContent != null">articleContent, </if>
+            <if test="articleCreationTime != null">articleCreationTime, </if>
+            <if test="articleUpdateTime != null">articleUpdateTime, </if>
+            <if test="articleStatus != null">articleStatus</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="articleId != null">#{articleId}, </if>
+            <if test="userId != null">#{userId}, </if>
+            <if test="categoryId != null">#{categoryId}, </if>
+            <if test="articleTitle != null">#{articleTitle}, </if>
+            <if test="articleSummary != null">#{articleSummary}, </if>
+            <if test="articleContent != null">#{articleContent}, </if>
+            <if test="articleCreationTime != null">#{articleCreationTime}, </if>
+            <if test="articleUpdateTime != null">#{articleUpdateTime}, </if>
+            <if test="articleStatus != null">#{articleStatus}</if>
+        </trim>
     </insert>
 
     <delete id="deleteByArticleId" parameterType="java.lang.Integer" >
@@ -98,7 +126,7 @@
         )
     </select>
 
-    <select id="selectPreArticle" parameterType="java.lang.Integer" resultMap="ArticleBlog" >
+    <select id="selectPreArticle" parameterType="c" resultMap="ArticleBlog" >
         select *
         from article
         where articleId > #{articleId}
@@ -114,7 +142,7 @@
         limit 1;
     </select>
 
-    <update id="update" parameterType="com.ljfu.lujorblog.domain.Article" >
+    <update id="updateArticle" parameterType="com.ljfu.lujorblog.domain.Article" >
         update article
         set userId = #{userId},
           categoryId = #{categoryId},
@@ -125,5 +153,37 @@
           articleStatu = #{sarticleStatus}
         where articleId = #{articleId}
     </update>
+    
+    <update id="updateArticleIfNecessary" parameterType="com.ljfu.lujorblog.domain.Article">
+        update article
+        <set>
+            <if test="userId != null" >userId = #{userId}, </if>
+            <if test="categoryId != null" >categoryId = #{categoryId}, </if>
+            <if test="articleTitle != null" >articleTitle = #{articleTitle}, </if>
+            <if test="articleSummary != null" >articleSummary = #{articleSummary}, </if>
+            <if test="articleContent != null" >articleContent = #{articleContent}, </if>
+            <if test="articleCreationTime != null">articleCreationTime = #{articleCreationTime}, </if>
+            <if test="articleUpdateTime != null" >articleUpdateTime = #{articleUpdateTime}, </if>
+            <if test="articleStatus != null" >articleStatus = #{articleStatus}</if>
+        </set>
+        where articleId = #{articleId}
+    </update>
+
+    <select id="countArticle" resultType="java.lang.Integer" >
+        select count(*)
+        from article;
+    </select>
+
+    <select id="countArticleByCategoryId" resultType="java.lang.Integer" >
+        select count(*)
+        from article
+        where categoryId = #{categoryId};
+    </select>
+
+    <select id="countArticleByTagId" resultType="java.lang.Integer" >
+        select count(*)
+        from articletotag
+        where tagId = #{tagId};
+    </select>
 
 </mapper>

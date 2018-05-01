@@ -12,6 +12,8 @@ public interface UserMapper {
 
     int insertUser(User user);
 
+    int insertUserIfNecessary(User user);
+
     int deleteByUserId(Integer userId);
 
     List<User> selectAllUser();
@@ -20,5 +22,6 @@ public interface UserMapper {
 
     int updateUser(User user);
 
-    int updateByUserIdSelective(User user);
+    int updateUserIfNecessary(User user);
+
 }

@@ -2,6 +2,7 @@ package com.ljfu.lujorblog.service.impl;
 
 import com.ljfu.lujorblog.domain.Article;
 import com.ljfu.lujorblog.mapper.ArticleMapper;
+import com.ljfu.lujorblog.mapper.CommentMapper;
 import com.ljfu.lujorblog.service.ArticleService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleMapper articleMapper;
+
+    @Autowired
+    private CommentMapper commentMapper;
 
     @Override
     public void addArticle(Article article) {
@@ -69,6 +73,30 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void modifyArticle(Article article) {
-        articleMapper.update(article);
+        articleMapper.updateArticle(article);
+    }
+
+    @Override
+    public Integer countArticle() {
+        Integer articleCount = articleMapper.countArticle();
+        return articleCount;
+    }
+
+    @Override
+    public Integer countArticleWithCategory(Integer categoryId) {
+        Integer count = articleMapper.countArticleByCategoryId(categoryId);
+        return count;
+    }
+
+    @Override
+    public Integer countArticleWithTag(Integer tagId) {
+        Integer count = articleMapper.countArticleByTagId(tagId);
+        return count;
+    }
+
+    @Override
+    public Integer countArticleComment(Integer articleId) {
+        Integer count = commentMapper.countArticleComment(articleId);
+        return count;
     }
 }

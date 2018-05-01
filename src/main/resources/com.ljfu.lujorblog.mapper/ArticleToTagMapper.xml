@@ -9,4 +9,21 @@
         <result column="tagId" property="tagId" />
     </resultMap>
 
+    <insert id="insertArticleTag" parameterType="com.ljfu.lujorblog.domain.ArticleToTag" >
+        insert into articletotag (articleToTagId, articleId, tagId)
+        values (#{articleToTagId}, #{articleId}, #{tagId});
+    </insert>
+
+    <delete id="deleteArticleTagByArticleId" parameterType="java.lang.Integer" >
+        delete
+        from articletotag
+        where articleId = #{articleId};
+    </delete>
+
+    <delete id="deleteArticleTagByTagId" parameterType="java.lang.Integer" >
+        delete
+        from articletotag
+        where tagId = #{tagId};
+    </delete>
+
 </mapper>

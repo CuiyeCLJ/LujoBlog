@@ -12,6 +12,8 @@ public interface TagMapper {
 
     int insertTag(Tag tag);
 
+    int insertTagIfNecessary(Tag tag);
+
     int deleteByTagId(Integer tagId);
 
     Tag selectByTagId(Integer tagId);
@@ -21,4 +23,6 @@ public interface TagMapper {
     List<Tag> selectTagsByArticleId(Integer articleId);
 
     int updateTag(Tag tag);
+
+    int updateTagIfNecessary(Tag tag);
 }

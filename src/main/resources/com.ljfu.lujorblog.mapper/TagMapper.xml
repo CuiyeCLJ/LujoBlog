@@ -20,6 +20,22 @@
         values (#{tagId}, #{tagName}, #{tagDescription}, #{tagStatus})
     </insert>
 
+    <insert id="insertTagIfNecessary" parameterType="com.ljfu.lujorblog.domain.Tag" >
+        insert into tag
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="tagId != null">tagId, </if>
+            <if test="tagName != null">tagName, </if>
+            <if test="tagDescription != null">tagDescription, </if>
+            <if test="tagStatus != null">tagStatus</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="tagId != null">#{tagId}, </if>
+            <if test="tagName != null">#{tagName}, </if>
+            <if test="tagDescription != null">#{tagDescription}, </if>
+            <if test="tagStatus != null">#{tagStatus}</if>
+        </trim>
+    </insert>
+
     <delete id="deleteByTagId" parameterType="java.lang.Integer" >
         delete from tag
         where tagId = #{tagId};
@@ -48,6 +64,16 @@
     <update id="updateTag" parameterType="com.ljfu.lujorblog.domain.Tag" >
         update tag set tagName = #{tagName}, tagDescription = #{tagDescription},
             tagStatus = #{tagStatus}
+        where tagId = #{tagId};
+    </update>
+
+    <update id="updateTagIfNecessary" parameterType="com.ljfu.lujorblog.domain.Tag" >
+        update tag
+        <set>
+            <if test="tagName != null" >tagName = #{tagName}, </if>
+            <if test="tagDescription != null" >tagDescription = #{tagDescription}, </if>
+            <if test="tagStatus != null" >tagStatus = #{tagStatus}</if>
+        </set>
         where tagId = #{tagId};
     </update>
 

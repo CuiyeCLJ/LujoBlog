@@ -12,14 +12,20 @@ public interface CategoryMapper {
 
     void insertCategory(Category category);
 
-    void deleteByCategoryId(Integer categoryId);
+    void insertCategoryIfNecessary(Category category);
 
-    List<Category> selectAllCategory();
+    void deleteByCategoryId(Integer categoryId);
 
     Category selectByCategoryId(Integer categoryId);
 
+    List<Category> selectAllCategory();
+
+    List<Category> selectCategorysByCategoryPid(Integer categoryPid);
+
     int updateCategory(Category category);
 
-    int updateCategorySelective(Category category);
+    int updateCategoryIfNecessary(Category category);
+
+
 
 }

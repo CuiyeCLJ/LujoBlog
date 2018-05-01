@@ -1,6 +1,7 @@
 package com.ljfu.lujorblog.mapper;
 
 import com.ljfu.lujorblog.domain.Article;
+import com.ljfu.lujorblog.domain.ArticleToTag;
 import com.ljfu.lujorblog.domain.Tag;
 
 import java.util.List;
@@ -11,7 +12,11 @@ import java.util.List;
  */
 public interface ArticleToTagMapper {
 
-    List<Article> selectArticlesByTagId(Integer tagId);
 
-    List<Tag> selectTagsByArticleId(Integer articleId);
+    int insertArticleTag(ArticleToTag articleToTag);
+
+    void deleteArticleTagByArticleId(Integer articleId);
+
+    void deleteArticleTagByTagId(Integer tagId);
+
 }

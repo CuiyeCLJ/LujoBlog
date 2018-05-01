@@ -8,6 +8,8 @@ public class Category {
 
     private Integer categoryId;
 
+    private Integer categoryPid;
+
     private String categoryName;
 
     private String categoryDescription;
@@ -20,6 +22,14 @@ public class Category {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Integer getCategoryPid() {
+        return categoryPid;
+    }
+
+    public void setCategoryPid(Integer categoryPid) {
+        this.categoryPid = categoryPid;
     }
 
     public String getCategoryName() {
