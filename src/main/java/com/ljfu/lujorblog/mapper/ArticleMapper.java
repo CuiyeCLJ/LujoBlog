@@ -32,6 +32,8 @@ public interface ArticleMapper {
 //    获取同一标签的文章
     List<Article> selectArticlesByTagId(Integer tagId);
 
+    List<Article> selectArticlesByPage(@Param(value = "start") Integer start, @Param(value = "pageSize") Integer pageSize);
+
 //    获取前一篇文章
     Article selectPreArticle(Integer articleId);
 
