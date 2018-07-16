@@ -13,14 +13,17 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <mybatis:scan base-package="com.ljfu.lujorblog.mapper" />
+    <mybatis:scan base-package="com.teiphu.mapper" />
 
-    <context:component-scan base-package="com.ljfu.lujorblog" />
+    <!--自动扫描 将标注Spring注解的类自动转化Bean-->
+    <context:component-scan base-package="com.teiphu" />
 
+    <!--加载数据资源属性文件-->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:jdbc.properties" />
     </bean>
 
+    <!--配置数据源-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${driver}" />
         <property name="url" value="${url}" />
@@ -33,20 +36,24 @@
         <property name="maxWait" value="${maxWait}" />
     </bean>
 
+    <!--装配dao接口-->
     <bean id="mapperScannerConfig" class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
-        <property name="basePackage" value="com.ljfu.lujorblog.mapper" />
+        <property name="basePackage" value="com.teiphu.mapper" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 
+    <!--配置sessionfactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:com.ljfu.lujorblog.mapper" />
+        <property name="mapperLocations" value="classpath:com.teiphu.mapper/*.xml" />
     </bean>
 
+    <!--声明式事务管理-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
         <property name="dataSource" ref="dataSource" />
     </bean>
 
+    <!--注解事务切面-->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>
