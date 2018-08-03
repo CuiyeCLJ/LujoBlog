@@ -18,6 +18,8 @@ public interface TagMapper {
 
     Tag selectByTagId(Integer tagId);
 
+    Tag selectByTagName(String tagName);
+
     List<Tag> selectAllTag();
 
     List<Tag> selectTagsByArticleId(Integer articleId);

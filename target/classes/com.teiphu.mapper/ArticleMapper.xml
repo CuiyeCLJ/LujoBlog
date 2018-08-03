@@ -95,22 +95,19 @@
         where articleId = #{articleId}
     </delete>
 
-    <select id="selectByArticleId" parameterType="java.lang.Integer" resultMap="ArticleBlog" >
-        select
-            <include refid="BaseColumnList" />,
-            <include refid="BlogColumnList" />
+    <select id="selectByArticleId" parameterType="java.lang.Integer" resultType="com.teiphu.domain.Article" >
+        select *
         from article
         where articleId = #{articleId}
     </select>
 
-    <select id="selectAllArticle" resultMap="ArticleBase" >
+    <select id="selectAllArticle" resultType="com.teiphu.domain.Article" >
         select <include refid="BaseColumnList" />
         from article
-        order by articleId desc;
     </select>
 
     <select id="selectArticlesByCategoryId" parameterType="java.lang.Integer"
-            resultMap="ArticleBase" >
+            resultType="com.teiphu.domain.Article">
         select <include refid="BaseColumnList" />
         from article
         WHERE categoryId = #{categoryId};
@@ -127,9 +124,8 @@
     </select>
 
     <select id="selectArticlesByPage" resultType="com.teiphu.domain.Article" >
-        select *
+        select <include refid="BaseColumnList"/>
         from article
-        order by articleId DESC
         limit #{start}, #{pageSize};
     </select>
 
@@ -164,8 +160,8 @@
           articleTitle = #{articleTitle},
           articleSummary = #{articleSummary},
           articleCreationTime = #{articleCreationTime},
-          articleUpdateTime = #{articleUpdateTime}
-          articleStatu = #{sarticleStatus}
+          articleUpdateTime = #{articleUpdateTime},
+          articleStatus = #{sarticleStatus}
         where articleId = #{articleId}
     </update>
     

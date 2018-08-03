@@ -8,7 +8,7 @@ package com.teiphu.util;
 public class Page {
 
 //    默认每页的记录数
-    public static final int PAGE_SIZE = 10;
+    public static final int PAGE_SIZE = 5;
 
 //    默认页号，为第一页
     public static final int PAGE_NUM = 1;
@@ -25,13 +25,24 @@ public class Page {
 //    每页的记录数
     private int pageSize = PAGE_SIZE;
 
-
     private int startPos;
+
+    public Page() {
+    }
 
     public Page(int totalRecords, int curPage) {
         this.totalRecords = totalRecords;
         this.curPage = curPage;
     }
+
+    private static class PageHolder {
+        final static Page INSTANCE = new Page();
+    }
+
+    public static Page getInstance() {
+        return PageHolder.INSTANCE;
+    }
+
 
     public int getCurPage() {
         return curPage;
@@ -44,7 +55,7 @@ public class Page {
     public int getTotalPageNum() {
         totalPageNum = getTotalRecords() / getPageSize();
         if (totalRecords % pageSize != 0) {
-            totalRecords += 1;
+            totalPageNum += 1;
         }
         return totalPageNum;
     }

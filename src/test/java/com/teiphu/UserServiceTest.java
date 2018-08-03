@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.sql.Timestamp;
-import java.util.List;
-
 /**
  * @author TeIphu
  * @data 2018.07.16 12:08
@@ -22,6 +19,12 @@ public class UserServiceTest {
     @Autowired
     UserService userService;
 
+    @Test
+    public void findUserByName() {
+        User user = userService.findUserByName("Qiuju");
+        System.out.println(user);
+    }
+    /*
     @Test
     public void addUser() {
         Timestamp date = new Timestamp(System.currentTimeMillis());
@@ -55,4 +58,5 @@ public class UserServiceTest {
         user.setUserEmail("1543981755@qq.com");
         userService.modifyUserIfNecessary(user);
     }
+    */
 }

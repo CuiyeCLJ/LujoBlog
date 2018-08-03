@@ -16,8 +16,8 @@
     </sql>
 
     <insert id="insertCategory" parameterType="com.teiphu.domain.Category" >
-        insert into category (categoryId, categoryName, categoryPid, categoryDescription, categoryStatus)
-        values (#{categoryId}, #{categoryPid}, #{categoryName}, #{categoryDescription}, #{categoryStatus})
+        insert into category (categoryPid, categoryName, categoryDescription, categoryStatus)
+        values (#{categoryPid}, #{categoryName}, #{categoryDescription}, #{categoryStatus})
     </insert>
 
     <insert id="insertCategoryIfNecessary" parameterType="com.teiphu.domain.Category" >
@@ -46,13 +46,18 @@
     <select id="selectAllCategory" resultType="com.teiphu.domain.Category" >
         select <include refid="CategoryAllColumn" />
         from category
-        order by categoryId asc
     </select>
 
     <select id="selectByCategoryId" parameterType="java.lang.Integer" resultMap="Category">
         select <include refid="CategoryAllColumn" />
         from category
         where categoryId = #{categoryId}
+    </select>
+
+    <select id="selectByCategoryName" parameterType="java.lang.String" resultMap="Category" >
+        select *
+        from category
+        where categoryName = #{categoryName};
     </select>
 
     <select id="selectCategorysByCategoryPid" parameterType="java.lang.Integer" resultType="com.teiphu.domain.Category" >

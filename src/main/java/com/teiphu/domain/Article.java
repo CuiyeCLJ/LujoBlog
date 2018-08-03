@@ -11,9 +11,9 @@ public class Article {
 
     private Integer articleId;
 
-//    private Integer userId;
+    private Integer userId;
 
-//    private Integer categoryId;
+    private Integer categoryId;
 
     private String articleTitle;
 
@@ -27,36 +27,53 @@ public class Article {
 
     private Integer articleStatus;
 
-    private User user;
+//    private User user;
 
-    private Category category;
+//    private Category category;
 
     private List<Tag> tags;
 
 //    private List<Comment> comments;
 
-    public User getUser() {
-        return user;
+
+    public Article() {
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public Article(Integer userId, Integer categoryId, String articleTitle, String articleSummary,
+                   String articleContent, Date articleCreationTime, Date articleUpdateTime, Integer articleStatus) {
+        this.userId = userId;
+        this.categoryId = categoryId;
+        this.articleTitle = articleTitle;
+        this.articleSummary = articleSummary;
+        this.articleContent = articleContent;
+        this.articleCreationTime = articleCreationTime;
+        this.articleUpdateTime = articleUpdateTime;
+        this.articleStatus = articleStatus;
     }
 
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
-
-    public Category getCategory() {
-        return category;
+    public Article(Integer articleId, Integer userId, Integer categoryId, String articleTitle, String articleSummary,
+                   Date articleCreationTime, Date articleUpdateTime, Integer articleStatus) {
+        this.articleId = articleId;
+        this.userId = userId;
+        this.categoryId = categoryId;
+        this.articleTitle = articleTitle;
+        this.articleSummary = articleSummary;
+        this.articleCreationTime = articleCreationTime;
+        this.articleUpdateTime = articleUpdateTime;
+        this.articleStatus = articleStatus;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public Article(Integer articleId, Integer userId, Integer categoryId, String articleTitle, String articleSummary,
+                   String articleContent, Date articleCreationTime, Date articleUpdateTime, Integer articleStatus) {
+        this.articleId = articleId;
+        this.userId = userId;
+        this.categoryId = categoryId;
+        this.articleTitle = articleTitle;
+        this.articleSummary = articleSummary;
+        this.articleContent = articleContent;
+        this.articleCreationTime = articleCreationTime;
+        this.articleUpdateTime = articleUpdateTime;
+        this.articleStatus = articleStatus;
     }
 
     public Integer getArticleId() {
@@ -67,28 +84,20 @@ public class Article {
         this.articleId = articleId;
     }
 
-//    public Integer getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Integer userId) {
-//        this.userId = userId;
-//    }
-//
-//    public Integer getCategoryId() {
-//        return categoryId;
-//    }
-//
-//    public void setCategoryId(Integer categoryId) {
-//        this.categoryId = categoryId;
-//    }
-
-    public List<Tag> getTags() {
-        return tags;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getArticleTitle() {
@@ -137,5 +146,28 @@ public class Article {
 
     public void setArticleStatus(Integer articleStatus) {
         this.articleStatus = articleStatus;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "articleId=" + articleId +
+                ", userId=" + userId +
+                ", categoryId=" + categoryId +
+                ", articleTitle='" + articleTitle + '\'' +
+                ", articleSummary='" + articleSummary + '\'' +
+                ", articleContent='" + articleContent + '\'' +
+                ", articleCreationTime=" + articleCreationTime +
+                ", articleUpdateTime=" + articleUpdateTime +
+                ", articleStatus=" + articleStatus +
+                '}';
     }
 }

@@ -27,6 +27,11 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public void addTagIfNecessary(Tag tag) {
+        tagMapper.insertTagIfNecessary(tag);
+    }
+
+    @Override
     public void removeTag(Integer tagId) {
         tagMapper.deleteByTagId(tagId);
     }
@@ -34,6 +39,12 @@ public class TagServiceImpl implements TagService {
     @Override
     public Tag findTag(Integer tagId) {
         Tag tag = tagMapper.selectByTagId(tagId);
+        return tag;
+    }
+
+    @Override
+    public Tag findTagByName(String tagName) {
+        Tag tag = tagMapper.selectByTagName(tagName);
         return tag;
     }
 
@@ -46,5 +57,10 @@ public class TagServiceImpl implements TagService {
     @Override
     public void modifyTag(Tag tag) {
         tagMapper.updateTag(tag);
+    }
+
+    @Override
+    public void modifyIfNecessary(Tag tag) {
+        tagMapper.updateTagIfNecessary(tag);
     }
 }

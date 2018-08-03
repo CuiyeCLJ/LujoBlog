@@ -26,7 +26,7 @@ public interface ArticleMapper {
 //    List<Article> selectArticleList(HashMap<String, Object> paramMap);
 
 //    获取同一类型的文章
-    List<Article> selectArticlesByCategoryId(@Param(value = "categoryId") Integer categoryId);
+    List<Article> selectArticlesByCategoryId(Integer categoryId);
 
 //    获取同一标签的文章
     List<Article> selectArticlesByTagId(Integer tagId);

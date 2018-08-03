@@ -53,7 +53,7 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <!--注解事务切面-->
+    <!--注解事务切面, 开启事务注解，标注@Transactional的类和方法将具有事务性-->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>

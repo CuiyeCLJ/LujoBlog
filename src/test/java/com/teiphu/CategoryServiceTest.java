@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-
 /**
  * @author TeIphu
  * @data 2018.07.16 16:15
@@ -21,6 +19,13 @@ public class CategoryServiceTest {
     @Autowired
     CategoryService categoryService;
 
+    @Test
+    public void findCategoryByName() {
+        Category category = categoryService.findCategoryByName("Java");
+        System.out.println(category);
+    }
+
+    /*
     @Test
     public void addCategory() {
         Category category = new Category();
@@ -77,6 +82,7 @@ public class CategoryServiceTest {
         Category category1 = categoryService.findCategoryByName("Java");
         System.out.println(category);
     }
+    */
 }
 
 

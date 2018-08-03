@@ -13,16 +13,22 @@ public interface TagService {
 //    添加标签
     void addTag(Tag tag);
 
+    void addTagIfNecessary(Tag tag);
+
 //    删除标签
     void removeTag(Integer tagId);
 
 //    根据Id获取标签
     Tag findTag(Integer tagId);
 
+    Tag findTagByName(String tagName);
+
 //    获取所有的标签
     List<Tag> findAllTags();
 
 //    修改标签
     void modifyTag(Tag tag);
+
+    void modifyIfNecessary(Tag tag);
 
 }

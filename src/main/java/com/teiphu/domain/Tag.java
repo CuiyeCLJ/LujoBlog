@@ -18,6 +18,28 @@ public class Tag {
 
     private List<Article> articles;
 
+    public Tag() {
+
+    }
+
+    public Tag(String tagName, String tagDescription) {
+        this.tagName = tagName;
+        this.tagDescription = tagDescription;
+    }
+
+    public Tag(String tagName, String tagDescription, Integer tagStatus) {
+        this.tagName = tagName;
+        this.tagDescription = tagDescription;
+        this.tagStatus = tagStatus;
+    }
+
+    public Tag(Integer tagId, String tagName, String tagDescription, Integer tagStatus) {
+        this.tagId = tagId;
+        this.tagName = tagName;
+        this.tagDescription = tagDescription;
+        this.tagStatus = tagStatus;
+    }
+
     public List<Article> getArticles() {
         return articles;
     }
@@ -56,5 +78,15 @@ public class Tag {
 
     public void setTagStatus(Integer tagStatus) {
         this.tagStatus = tagStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "tagId=" + tagId +
+                ", tagName='" + tagName + '\'' +
+                ", tagDescription='" + tagDescription + '\'' +
+                ", tagStatus=" + tagStatus +
+                '}';
     }
 }

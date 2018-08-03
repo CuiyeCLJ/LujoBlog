@@ -16,10 +16,10 @@
     </resultMap>
     
     <insert id="insertUser" parameterType="com.teiphu.domain.User">
-        insert into user (userId, userName, userNickname, userPassword, userSex,
-            userEmail, userAvatar, userRegTime, userStatus)
-        values (#{userId}, #{userName}, #{userNickname}, #{userPassword}, #{userSex},
-            #{userEmail}, #{userAvatar}, #{userRegTime}, #{userRegTime});
+        insert into user (userName, userNickname, userPassword, userSex,
+            userEmail, userAvatar, userRegTime)
+        values (#{userName}, #{userNickname}, #{userPassword}, #{userSex},
+            #{userEmail}, #{userAvatar}, #{userRegTime});
     </insert>
 
     <insert id="insertUserIfNecessary" parameterType="com.teiphu.domain.User" >
@@ -59,10 +59,16 @@
         from user;
     </select>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+    <select id="selectByUserId" parameterType="java.lang.Integer"
             resultType="com.teiphu.domain.User" >
         select * from user
         where userId = #{userId};
+    </select>
+
+    <select id="selectByUserName" parameterType="java.lang.String"
+            resultType="com.teiphu.domain.User">
+        select * from user
+        where userName = #{userName}
     </select>
 
     <update id="updateUser" parameterType="com.teiphu.domain.User" >

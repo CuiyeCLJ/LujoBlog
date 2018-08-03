@@ -16,8 +16,8 @@
     </resultMap>
 
     <insert id="insertTag" parameterType="com.teiphu.domain.Tag" >
-        insert into tag (tagId, tagName, tagDescription, tagStatus)
-        values (#{tagId}, #{tagName}, #{tagDescription}, #{tagStatus})
+        insert into tag (tagName, tagDescription, tagStatus)
+        values (#{tagName}, #{tagDescription}, #{tagStatus})
     </insert>
 
     <insert id="insertTagIfNecessary" parameterType="com.teiphu.domain.Tag" >
@@ -41,7 +41,7 @@
         where tagId = #{tagId};
     </delete>
 
-    <select id="selectByPrimaryKey" resultMap="TagAll" parameterType="java.lang.Integer" >
+    <select id="selectByTagId" resultMap="TagAll" parameterType="java.lang.Integer" >
         select * from tag
         where tagId = #{tagId};
     </select>
@@ -49,6 +49,12 @@
     <select id="selectAllTag" resultType="com.teiphu.domain.Tag" >
         select * from tag
         order by tagId asc;
+    </select>
+
+    <select id="selectByTagName" resultType="com.teiphu.domain.Tag" >
+        select *
+        from tag
+        where tagName = #{tagName};
     </select>
     
     <select id="selectTagsByArticleId" parameterType="java.lang.Integer"

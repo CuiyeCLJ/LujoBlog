@@ -76,14 +76,19 @@ public class ArticleServiceImpl implements ArticleService {
     private TagMapper tagMapper;
     @Override
     public List<Article> findArticleByPage(int curPage) {
-//        List<Article> articles = new ArrayList<>();
+        LOGGER.info("Invoke ArticleServiceImpl.findArticleByPage()");
         int totalRecords = articleMapper.countArticle();
-        Page page = new Page(totalRecords, curPage);
+        LOGGER.info(totalRecords);
+//        Page page = new Page(totalRecords, curPage);
+        Page page = Page.getInstance();
+        page.setTotalRecords(totalRecords);
+        page.setCurPage(curPage);
         List<Article> articles = articleMapper.selectArticlesByPage(page.getStartPos(), page.getPageSize());
-        for (int i = 0; i < articles.size(); i++) {
-            Article article = articles.get(i);
-            article.setTags(tagMapper.selectTagsByArticleId(article.getArticleId()));
-        }
+        LOGGER.info(page.getTotalPageNum());
+//        for (int i = 0; i < articles.size(); i++) {
+//            Article article = articles.get(i);
+//            article.setTags(tagMapper.selectTagsByArticleId(article.getArticleId()));
+//        }
         return articles;
     }
 

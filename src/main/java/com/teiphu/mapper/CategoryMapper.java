@@ -1,6 +1,5 @@
 package com.teiphu.mapper;
 
-import com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl;
 import com.teiphu.domain.Category;
 
 import java.util.List;
