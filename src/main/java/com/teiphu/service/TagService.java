@@ -23,6 +23,8 @@ public interface TagService {
 
     Tag findTagByName(String tagName);
 
+    List<Tag> findTageByArticleId(Integer articleId);
+
 //    获取所有的标签
     List<Tag> findAllTags();
 

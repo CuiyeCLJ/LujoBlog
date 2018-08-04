@@ -29,12 +29,11 @@ public class Article {
 
 //    private User user;
 
-//    private Category category;
+    private Category category;
 
     private List<Tag> tags;
 
 //    private List<Comment> comments;
-
 
     public Article() {
     }
@@ -74,6 +73,36 @@ public class Article {
         this.articleCreationTime = articleCreationTime;
         this.articleUpdateTime = articleUpdateTime;
         this.articleStatus = articleStatus;
+    }
+
+    public Article(Integer articleId, Integer userId, String articleTitle, String articleSummary, String articleContent,
+                   Date articleCreationTime, Date articleUpdateTime, Integer articleStatus, Category category, List<Tag> tags) {
+        this.articleId = articleId;
+        this.userId = userId;
+        this.articleTitle = articleTitle;
+        this.articleSummary = articleSummary;
+        this.articleContent = articleContent;
+        this.articleCreationTime = articleCreationTime;
+        this.articleUpdateTime = articleUpdateTime;
+        this.articleStatus = articleStatus;
+        this.category = category;
+        this.tags = tags;
+    }
+
+    public Article(Integer articleId, Integer userId, Integer categoryId, String articleTitle,
+                   String articleSummary, String articleContent, Date articleCreationTime,
+                   Date articleUpdateTime, Integer articleStatus, Category category, List<Tag> tags) {
+        this.articleId = articleId;
+        this.userId = userId;
+        this.categoryId = categoryId;
+        this.articleTitle = articleTitle;
+        this.articleSummary = articleSummary;
+        this.articleContent = articleContent;
+        this.articleCreationTime = articleCreationTime;
+        this.articleUpdateTime = articleUpdateTime;
+        this.articleStatus = articleStatus;
+        this.category = category;
+        this.tags = tags;
     }
 
     public Integer getArticleId() {
@@ -154,6 +183,14 @@ public class Article {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

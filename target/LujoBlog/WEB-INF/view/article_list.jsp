@@ -43,8 +43,8 @@
         <ul class="nav navbar-nav navbar-left">
             <li role="presentation"><a href="/listAllArticle">首頁</a></li>
             <li role="presentation"><a href="http://www.baidu.com">歸檔</a></li>
-            <li role="presentation"><a href="http://www.baidu.com">分類</a></li>
-            <li role="presentation"><a href="http://www.baidu.com">標簽</a></li>
+            <li role="presentation"><a href="/listAllCategory">分類</a></li>
+            <li role="presentation"><a href="/listAllTag">標簽</a></li>
             <li role="presentation"><a href="http://www.baidu.com">關於</a></li>
         </ul>
         <form class="navbar-form navbar-right">
@@ -59,17 +59,33 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
-            <h2>關於我</h2>
-            <h5>我的照片</h5>
-            <div class="fakeimg">這邊插入圖像</div>
-            <p>關於我的介紹</p>
-            <h3>鏈接</h3>
-            <p>描述文本</p>
-            <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">链接 1</a></li>
-                <li><a href="#">链接 2</a></li>
-                <li><a href="#">链接 3</a></li>
-            </ul>
+            <div class="col-sm-3 col-md-9">
+                <div class="thumbnail">
+                    <img src="WEB-INF/view/img/myicon2.jpg">
+                </div>
+                <div class="caption">
+                    <h3>Teiphu</h3>
+                    <h4>Java&nbsp;Developer</h4>
+                    <span>Guangzhou,&nbsp;China</span>
+                    <p><a href="#" class="btn btn-info" role="button">關注我</a></p>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="#">链接 1</a></li>
+                        <li><a href="#">链接 2</a></li>
+                        <li><a href="#">链接 3</a></li>
+                    </ul>
+                </div>
+            </div>
+            <%--<h2>關於我</h2>--%>
+            <%--<h5>我的照片</h5>--%>
+            <%--<div class="fakeimg">這邊插入圖像</div>--%>
+            <%--<p>關於我的介紹</p>--%>
+            <%--<h3>鏈接</h3>--%>
+            <%--<p>描述文本</p>--%>
+            <%--<ul class="nav nav-pills nav-stacked">--%>
+                <%--<li><a href="#">链接 1</a></li>--%>
+                <%--<li><a href="#">链接 2</a></li>--%>
+                <%--<li><a href="#">链接 3</a></li>--%>
+            <%--</ul>--%>
         </div>
 
         <div class="col-sm-8">
@@ -77,14 +93,16 @@
             <c:forEach items="${articles}" var="article" >
                 <div class="panel panel-default">
                     <div class="panel-title">
-                        <h3><a href="/${article.articleId}" style="text-decoration: none">&nbsp;${article.articleTitle}</a></h3>
+                        <h3><a href="/article/${article.articleId}" style="text-decoration: none">&nbsp;${article.articleTitle}</a></h3>
                     </div>
                     <div>
                         <a href="#" style="text-decoration: none">
                             <time pubdate>&nbsp;&nbsp;${article.articleCreationTime}</time>
                         </a>
-                        <a href="#" style="text-decoration: none">&nbsp;哈希</a>
-                        <a href="#" style="text-decoration: none">&nbsp;哈希</a>
+                        <c:forEach items="${article.tags}" var="tag">
+                            <a href="/tag/${tag.tagId}" style="text-decoration: none">&nbsp;${tag.tagName}</a>
+                        </c:forEach>
+                        <a href="/category/${article.category.categoryId}" style="text-decoration: none">&nbsp;${article.category.categoryName}</a>
                     </div>
                     <div class="panel-body">
                         <p><blockquote><p>${article.articleSummary}</p></blockquote></p>
@@ -92,7 +110,7 @@
                     </div>
 
                     <div class="panel-footer">
-                        <p><a href="/${article.articleId}" style="text-decoration: none">查看更多</a></p>
+                        <p><a href="/article/${article.articleId}" style="text-decoration: none">查看更多</a></p>
                     </div>
                 </div>
             </c:forEach>

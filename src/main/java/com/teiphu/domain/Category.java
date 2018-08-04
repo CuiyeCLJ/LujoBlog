@@ -6,15 +6,17 @@ package com.teiphu.domain;
  */
 public class Category {
 
-    private Long categoryId;
+    private Integer categoryId;
 
-    private Long categoryPid;
+    private Integer categoryPid;
 
     private String categoryName;
 
     private String categoryDescription;
 
-    private Long categoryStatus;
+    private Integer categoryStatus;
+
+    private Integer articleNum;
 
     public Category() {
     }
@@ -24,8 +26,8 @@ public class Category {
         this.categoryDescription = categoryDescription;
     }
 
-    public Category(Long categoryId, Long categoryPid, String categoryName,
-                    String categoryDescription, Long categoryStatus) {
+    public Category(Integer categoryId, Integer categoryPid, String categoryName,
+                    String categoryDescription, Integer categoryStatus) {
         this.categoryId = categoryId;
         this.categoryPid = categoryPid;
         this.categoryName = categoryName;
@@ -33,19 +35,19 @@ public class Category {
         this.categoryStatus = categoryStatus;
     }
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
-    public Long getCategoryPid() {
+    public Integer getCategoryPid() {
         return categoryPid;
     }
 
-    public void setCategoryPid(Long categoryPid) {
+    public void setCategoryPid(Integer categoryPid) {
         this.categoryPid = categoryPid;
     }
 
@@ -65,12 +67,20 @@ public class Category {
         this.categoryDescription = categoryDescription;
     }
 
-    public Long getCategoryStatus() {
+    public Integer getCategoryStatus() {
         return categoryStatus;
     }
 
-    public void setCategoryStatus(Long categoryStatus) {
+    public void setCategoryStatus(Integer categoryStatus) {
         this.categoryStatus = categoryStatus;
+    }
+
+    public Integer getArticleNum() {
+        return articleNum;
+    }
+
+    public void setArticleNum(Integer articleNum) {
+        this.articleNum = articleNum;
     }
 
     @Override

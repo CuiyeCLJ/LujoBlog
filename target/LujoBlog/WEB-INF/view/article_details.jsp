@@ -35,8 +35,8 @@
         <ul class="nav navbar-nav navbar-left">
             <li role="presentation"><a href="/listAllArticle">首頁</a></li>
             <li role="presentation"><a href="http://www.baidu.com">歸檔</a></li>
-            <li role="presentation"><a href="http://www.baidu.com">分類</a></li>
-            <li role="presentation"><a href="http://www.baidu.com">標簽</a></li>
+            <li role="presentation"><a href="/listAllCategory">分類</a></li>
+            <li role="presentation"><a href="/listAllTag">標簽</a></li>
             <li role="presentation"><a href="http://www.baidu.com">關於</a></li>
         </ul>
         <form class="navbar-form navbar-right">
@@ -51,17 +51,33 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
-            <h2>關於我</h2>
-            <h5>我的照片</h5>
-            <div class="fakeimg">這邊插入圖像</div>
-            <p>關於我的介紹</p>
-            <h3>鏈接</h3>
-            <p>描述文本</p>
-            <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">链接 1</a></li>
-                <li><a href="#">链接 2</a></li>
-                <li><a href="#">链接 3</a></li>
-            </ul>
+            <div class="col-sm-3 col-md-9">
+                <div class="thumbnail">
+                    <img src="WEB-INF/view/img/myicon2.jpg">
+                </div>
+                <div class="caption">
+                    <h3>Teiphu</h3>
+                    <h4>Java&nbsp;Developer</h4>
+                    <span>Guangzhou,&nbsp;China</span>
+                    <p><a href="#" class="btn btn-info" role="button">關注我</a></p>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="#">链接 1</a></li>
+                        <li><a href="#">链接 2</a></li>
+                        <li><a href="#">链接 3</a></li>
+                    </ul>
+                </div>
+            </div>
+            <%--<h2>關於我</h2>--%>
+            <%--<h5>我的照片</h5>--%>
+            <%--<div class="fakeimg">這邊插入圖像</div>--%>
+            <%--<p>關於我的介紹</p>--%>
+            <%--<h3>鏈接</h3>--%>
+            <%--<p>描述文本</p>--%>
+            <%--<ul class="nav nav-pills nav-stacked">--%>
+                <%--<li><a href="#">链接 1</a></li>--%>
+                <%--<li><a href="#">链接 2</a></li>--%>
+                <%--<li><a href="#">链接 3</a></li>--%>
+            <%--</ul>--%>
         </div>
 
         <div class="col-sm-9">
@@ -80,7 +96,7 @@
 
                         </c:when>
                         <c:otherwise>
-                            <li class="previous"><a href="${article.articleId-1}"><span aria-hidden="true">&larr;</span>上一篇</a></li>
+                            <li class="previous"><a href="/article/${article.articleId-1}"><span aria-hidden="true">&larr;</span>上一篇</a></li>
                         </c:otherwise>
                     </c:choose>
 
@@ -89,7 +105,7 @@
 
                         </c:when>
                         <c:otherwise>
-                            <li class="next"><a href="${article.articleId+1}">下一篇<span aria-hidden="true">&rarr;</span></a></li>
+                            <li class="next"><a href="/article/${article.articleId+1}">下一篇<span aria-hidden="true">&rarr;</span></a></li>
                         </c:otherwise>
                     </c:choose>
 

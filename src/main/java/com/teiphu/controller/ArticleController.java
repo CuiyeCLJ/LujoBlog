@@ -43,7 +43,8 @@ public class ArticleController {
     @RequestMapping("/page/{curPage}")
     public @ResponseBody ModelAndView ObtainArticleListByPage(@PathVariable("curPage") Integer curPage) {
         ModelAndView modelAndView = new ModelAndView();
-        List<Article> articles = articleService.findArticleByPage(curPage);
+//        List<Article> articles = articleService.findArticleByPage(curPage);
+        List<Article> articles = articleService.findArticlesByPageAssociateOtherTables(curPage);
         Page page = Page.getInstance();
         int totalPageNum = page.getTotalPageNum();
         modelAndView.addObject("totalPageNum", totalPageNum);
@@ -52,23 +53,27 @@ public class ArticleController {
         return modelAndView;
     }
 
+    /**
+     * 查询所有的文章并分页处理
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/listAllArticle", method = RequestMethod.GET)
     public String listAllArticle(Model model) {
         LOGGER.info("Invoke ArticleController listAllArticle");
-//        List<Article> articles = articleService.findAllArticles();
-        List<Article> articles = articleService.findArticleByPage(1);
+//        List<Article> articles = articleService.findArticleByPage(1);
+        List<Article> articles = articleService.findArticlesByPageAssociateOtherTables(1);
+        System.out.println(articles.size());
         Page page = Page.getInstance();
         int totalPageNum = page.getTotalPageNum();
         model.addAttribute("totalPageNum", totalPageNum);
         int curPage = 1;
         model.addAttribute("curPage", curPage);
-//        System.out.println(page.getTotalPageNum());
-//        System.out.println(articles.size());
         model.addAttribute("articles", articles);
         return "article_list";
     }
 
-    @RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/article/{articleId}", method = RequestMethod.GET)
     public String articleDetail(@PathVariable("articleId") Integer articleId, Model model) {
         LOGGER.info("Invoke ArticleController.articleDetail()");
         Article article = articleService.findArticle(articleId);

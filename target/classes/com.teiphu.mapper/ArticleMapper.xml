@@ -4,26 +4,27 @@
 <mapper namespace="com.teiphu.mapper.ArticleMapper">
 
     <resultMap id="ArticleBase" type="com.teiphu.domain.Article" >
-        <id column="articleId" property="" />
+        <id column="articleId" property="articleId" />
         <!--<result column="userId" property="userId"/>-->
-        <result column="categoryId" property="categoryId"/>
+        <!--<result column="categoryId" property="categoryId"/>-->
         <result column="articleTitle" property="articleTitle"/>
         <result column="articleSummary" property="articleSummary" />
         <result column="articleCreationTime" property="articleCreationTime"/>
         <result column="articleUpdateTime" property="articleUpdateTime"/>
         <result column="articleStatus" property="articleStatus"/>
+        <result column="userId" property="userId" />
         <!--文章与用户之间的多对一关联映射:association-->
-        <association property="user" column="userId" javaType="com.teiphu.domain.User">
-            <id property="userId" column="userId" />
-            <result property="userName" column="userName" />
-            <result property="userNickname" column="userNickname" />
-            <result property="userPassword" column="userPassword" />
-            <result property="userSex" column="userSex" />
-            <result property="userEmail" column="userEmail" />
-            <result property="userAvatar" column="userAvatar" />
-            <result property="userRegTime" column="userRegTime" />
-            <result property="userStatus" column="userStatus" />
-        </association>
+        <!--<association property="user" column="userId" javaType="com.teiphu.domain.User">-->
+            <!--<id property="userId" column="userId" />-->
+            <!--<result property="userName" column="userName" />-->
+            <!--<result property="userNickname" column="userNickname" />-->
+            <!--<result property="userPassword" column="userPassword" />-->
+            <!--<result property="userSex" column="userSex" />-->
+            <!--<result property="userEmail" column="userEmail" />-->
+            <!--<result property="userAvatar" column="userAvatar" />-->
+            <!--<result property="userRegTime" column="userRegTime" />-->
+            <!--<result property="userStatus" column="userStatus" />-->
+        <!--</association>-->
         <!--文章与分类的多对一关联映射-->
         <association property="category" column="categoryId" javaType="com.teiphu.domain.Category" >
             <id property="categoryId" column="categoryId" />
@@ -33,8 +34,7 @@
             <result property="categoryStatus" column="categoryStatus" />
         </association>
         <!--文章与标签之间的多对多关联映射:collection-->
-        <collection property="tags" column="articleId" javaType="ArrayList"
-                     ofType="com.teiphu.domain.Tag"
+        <collection property="tags" column="articleId" javaType="ArrayList" ofType="com.teiphu.domain.Tag"
                     select="com.teiphu.mapper.TagMapper.selectTagsByArticleId"
                     fetchType="lazy" >
             <id property="tagId" column="tagId" />
@@ -92,40 +92,56 @@
 
     <delete id="deleteByArticleId" parameterType="java.lang.Integer" >
         delete from article
-        where articleId = #{articleId}
+        where articleId = #{articleId};
     </delete>
 
     <select id="selectByArticleId" parameterType="java.lang.Integer" resultType="com.teiphu.domain.Article" >
         select *
         from article
-        where articleId = #{articleId}
+        where articleId = #{articleId};
+    </select>
+
+    <select id="selectByArticleIdAssociateOtherTables" parameterType="java.lang.Integer" resultMap="ArticleBase">
+        select *
+        from article, category
+        where article.categoryId = category.categoryId
+        and articleId = #{articleId};
     </select>
 
     <select id="selectAllArticle" resultType="com.teiphu.domain.Article" >
         select <include refid="BaseColumnList" />
-        from article
+        from article;
     </select>
 
     <select id="selectArticlesByCategoryId" parameterType="java.lang.Integer"
-            resultType="com.teiphu.domain.Article">
-        select <include refid="BaseColumnList" />
-        from article
-        WHERE categoryId = #{categoryId};
+            resultMap="ArticleBase">
+        select *
+        from article, category
+        WHERE article.categoryId = category.categoryId
+        and article.categoryId = #{categoryId};
     </select>
 
     <select id="selectArticlesByTagId" parameterType="java.lang.Integer" resultMap="ArticleBase" >
-        select <include refid="BaseColumnList" />
-        from article
-        where articleId in (
+        select *
+        from article, category
+        where article.categoryId = category.categoryId
+        and article.articleId in (
             select articleId
             from articletotag
             where tagId = #{tagId}
-        )
+        );
     </select>
 
     <select id="selectArticlesByPage" resultType="com.teiphu.domain.Article" >
         select <include refid="BaseColumnList"/>
         from article
+        limit #{start}, #{pageSize};
+    </select>
+
+    <select id="selectArticlesByPageAssociateOtherTables" resultMap="ArticleBase" >
+        select *
+        from article, category
+        where article.categoryId = category.categoryId
         limit #{start}, #{pageSize};
     </select>
 

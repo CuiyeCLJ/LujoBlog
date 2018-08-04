@@ -1,7 +1,10 @@
 package com.teiphu.service.impl;
 
 import com.teiphu.domain.Article;
+import com.teiphu.domain.Category;
+import com.teiphu.domain.Tag;
 import com.teiphu.mapper.ArticleMapper;
+import com.teiphu.mapper.CategoryMapper;
 import com.teiphu.mapper.CommentMapper;
 import com.teiphu.mapper.TagMapper;
 import com.teiphu.service.ArticleService;
@@ -25,6 +28,12 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
 
     @Autowired
+    private TagMapper tagMapper;
+
+    @Autowired
+    private CategoryMapper categoryMapper;
+
+    @Autowired
     private CommentMapper commentMapper;
 
     @Override
@@ -40,6 +49,16 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article findArticle(Integer articleId) {
         Article article = articleMapper.selectByArticleId(articleId);
+        List<Tag> tags = tagMapper.selectTagsByArticleId(articleId);
+        article.setTags(tags);
+        Category category = categoryMapper.selectByCategoryId(article.getCategoryId());
+        article.setCategory(category);
+        return article;
+    }
+
+    @Override
+    public Article findByArticleIdAssociateOtherTables(Integer articleId) {
+        Article article = articleMapper.selectByArticleIdAssociateOtherTables(articleId);
         return article;
     }
 
@@ -73,7 +92,6 @@ public class ArticleServiceImpl implements ArticleService {
         return article;
     }
 
-    private TagMapper tagMapper;
     @Override
     public List<Article> findArticleByPage(int curPage) {
         LOGGER.info("Invoke ArticleServiceImpl.findArticleByPage()");
@@ -89,6 +107,17 @@ public class ArticleServiceImpl implements ArticleService {
 //            Article article = articles.get(i);
 //            article.setTags(tagMapper.selectTagsByArticleId(article.getArticleId()));
 //        }
+        return articles;
+    }
+
+    @Override
+    public List<Article> findArticlesByPageAssociateOtherTables(int curPage) {
+        LOGGER.info("Invoke ArticleServiceImpl.findArticlesByPageAssociateOtherTables()");
+        int totalRecords = articleMapper.countArticle();
+        Page page = Page.getInstance();
+        page.setTotalRecords(totalRecords);
+        page.setCurPage(curPage);
+        List<Article> articles = articleMapper.selectArticlesByPageAssociateOtherTables(page.getStartPos(), page.getPageSize());
         return articles;
     }
 

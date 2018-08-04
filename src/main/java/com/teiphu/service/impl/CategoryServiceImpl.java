@@ -1,6 +1,7 @@
 package com.teiphu.service.impl;
 
 import com.teiphu.domain.Category;
+import com.teiphu.mapper.ArticleMapper;
 import com.teiphu.mapper.CategoryMapper;
 import com.teiphu.service.CategoryService;
 import org.apache.log4j.Logger;
@@ -20,6 +21,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;
+
+    @Autowired
+    private ArticleMapper articleMapper;
 
     @Override
     public void addCategory(Category category) {
@@ -51,6 +55,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> findAllCategorys() {
         List<Category> categories = categoryMapper.selectAllCategory();
+        for (Category category : categories) {
+            category.setArticleNum(articleMapper.countArticleByCategoryId(category.getCategoryId()));
+        }
         return categories;
     }
 

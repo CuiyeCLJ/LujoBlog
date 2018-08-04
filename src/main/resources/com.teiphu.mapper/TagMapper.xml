@@ -63,8 +63,8 @@
         where tagId in (
             select tagId
             from articletotag
-            where articleId = #{articleId};
-        )
+            where articleId = #{articleId}
+        );
     </select>
 
     <update id="updateTag" parameterType="com.teiphu.domain.Tag" >

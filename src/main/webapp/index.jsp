@@ -18,7 +18,7 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
-<body>
+<body style="background-color:#F3FCFE;">
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
@@ -42,10 +42,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left">
             <li role="presentation"><a href="/listAllArticle">首頁</a></li>
-            <li role="presentation"><a href="http://www.baidu.com">歸檔</a></li>
-            <li role="presentation"><a href="http://www.baidu.com">分類</a></li>
-            <li role="presentation"><a href="http://www.baidu.com">標簽</a></li>
-            <li role="presentation"><a href="http://www.baidu.com">關於</a></li>
+            <li role="presentation"><a href="#">歸檔</a></li>
+            <li role="presentation"><a href="/listAllCategory">分類</a></li>
+            <li role="presentation"><a href="/listAllTag">標簽</a></li>
+            <li role="presentation"><a href="#">關於</a></li>
         </ul>
         <form class="navbar-form navbar-right">
             <div class="form-group">
@@ -56,23 +56,32 @@
     </div>
 </nav>
 
+<%--<div>--%>
+    <%--<iframe marginwidth="0" marginheight="0" frameborder="0" scrolling="no" src="WEB-INF/view/head.jsp" height="auto" width="100%"></iframe>--%>
+<%--</div>--%>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
-            <h2>關於我</h2>
-            <h5>我的照片</h5>
-            <div class="fakeimg">這邊插入圖像</div>
-            <p>關於我的介紹</p>
-            <h3>鏈接</h3>
-            <p>描述文本</p>
-            <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">链接 1</a></li>
-                <li><a href="#">链接 2</a></li>
-                <li><a href="#">链接 3</a></li>
-            </ul>
+            <div class="col-sm-3 col-md-9">
+                <div class="thumbnail">
+                    <img src="WEB-INF/view/img/myicon2.jpg">
+                </div>
+                <div class="caption">
+                    <h3>Teiphu</h3>
+                    <h4>Java&nbsp;Developer</h4>
+                    <span>Guangzhou,&nbsp;China</span>
+                    <p><a href="#" class="btn btn-info" role="button">關注我</a></p>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="#">链接 1</a></li>
+                        <li><a href="#">链接 2</a></li>
+                        <li><a href="#">链接 3</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="col-sm-8">
+        <div class="col-sm-9">
 
             <c:forEach items="${articles}" var="article" >
                 <div class="panel panel-default">

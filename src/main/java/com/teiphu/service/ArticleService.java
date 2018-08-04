@@ -17,6 +17,8 @@ public interface ArticleService {
 //    根据Id获取文章
     Article findArticle(Integer articleId);
 
+    Article findByArticleIdAssociateOtherTables(Integer articleId);
+
 //    获取所有的文章
     List<Article> findAllArticles();
 
@@ -31,6 +33,8 @@ public interface ArticleService {
     Article findLatArticle(Integer articleId);
 
     List<Article> findArticleByPage(int curPage);
+
+    List<Article> findArticlesByPageAssociateOtherTables(int curPage);
 
     void modifyArticle(Article article);
 

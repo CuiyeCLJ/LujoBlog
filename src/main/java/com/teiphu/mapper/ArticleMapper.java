@@ -20,6 +20,8 @@ public interface ArticleMapper {
 //    获取一篇文章
     Article selectByArticleId(Integer articleId);
 
+    Article selectByArticleIdAssociateOtherTables(Integer articleId);
+
 //    获取所有的文章，不包括文章内容，作为首页的列表
     List<Article> selectAllArticle();
 
@@ -32,6 +34,9 @@ public interface ArticleMapper {
     List<Article> selectArticlesByTagId(Integer tagId);
 
     List<Article> selectArticlesByPage(@Param(value = "start") Integer start,
+                                       @Param(value = "pageSize") Integer pageSize);
+
+    List<Article> selectArticlesByPageAssociateOtherTables(@Param(value = "start") Integer start,
                                        @Param(value = "pageSize") Integer pageSize);
 
 //    获取前一篇文章
