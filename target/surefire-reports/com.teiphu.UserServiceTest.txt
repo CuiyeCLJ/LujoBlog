@@ -1,4 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: com.teiphu.UserServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s - in com.teiphu.UserServiceTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! - in com.teiphu.UserServiceTest
+initializationError(com.teiphu.UserServiceTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: No runnable methods
+

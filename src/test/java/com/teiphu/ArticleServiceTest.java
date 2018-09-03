@@ -1,7 +1,6 @@
 package com.teiphu;
 
 import com.teiphu.service.ArticleService;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -124,11 +123,11 @@ public class ArticleServiceTest {
 //
 //    void modifyArticle(Article article);
 //
-    @Test
-    public void countArticle() {
-        int count = articleService.countArticle();
-        System.out.println(count);
-    }
+//    @Test
+//    public void countArticle() {
+//        int count = articleService.countArticle();
+//        System.out.println(count);
+//    }
 
 //    @Test
 //    public void countArticleWithCategory() {

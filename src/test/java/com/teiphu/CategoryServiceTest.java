@@ -1,8 +1,6 @@
 package com.teiphu;
 
-import com.teiphu.domain.Category;
 import com.teiphu.service.CategoryService;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,11 +17,11 @@ public class CategoryServiceTest {
     @Autowired
     CategoryService categoryService;
 
-    @Test
-    public void findCategoryByName() {
-        Category category = categoryService.findCategoryByName("Java");
-        System.out.println(category);
-    }
+//    @Test
+//    public void findCategoryByName() {
+//        Category category = categoryService.findCategoryByName("Java");
+//        System.out.println(category);
+//    }
 
 
 //    @Test

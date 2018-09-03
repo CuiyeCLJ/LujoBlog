@@ -1,8 +1,6 @@
 package com.teiphu;
 
-import com.teiphu.domain.User;
 import com.teiphu.service.UserService;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,11 +17,11 @@ public class UserServiceTest {
     @Autowired
     UserService userService;
 
-    @Test
-    public void findUserByName() {
-        User user = userService.findUserByName("Qiuju");
-        System.out.println(user);
-    }
+//    @Test
+//    public void findUserByName() {
+//        User user = userService.findUserByName("Qiuju");
+//        System.out.println(user);
+//    }
     /*
     @Test
     public void addUser() {

@@ -1,14 +1,10 @@
 package com.teiphu;
 
-import com.teiphu.domain.Tag;
 import com.teiphu.service.TagService;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.List;
 
 /**
  * @author TeIphu
@@ -28,13 +24,13 @@ public class TagServiceTest {
 //        System.out.println(tag);
 //    }
 
-    @Test
-    public void findTagByArticleId() {
-        List<Tag> tags = tagService.findTageByArticleId(1);
-        for (Tag tag : tags) {
-            System.out.println(tag);
-        }
-    }
+//    @Test
+//    public void findTagByArticleId() {
+//        List<Tag> tags = tagService.findTageByArticleId(1);
+//        for (Tag tag : tags) {
+//            System.out.println(tag);
+//        }
+//    }
 
 
 

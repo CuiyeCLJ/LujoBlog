@@ -1,12 +1,17 @@
+com\teiphu\interceptor\MethodCacheInterceptor.class
 com\teiphu\service\CommentService.class
 com\teiphu\service\impl\CommentServiceImpl.class
+com\teiphu\redis\RedisBaiseTakes.class
 com\teiphu\controller\CommentController.class
 com\teiphu\controller\UserController.class
 com\teiphu\service\impl\CategoryServiceImpl.class
+com\teiphu\util\DataSourceExchange.class
 com\teiphu\util\Page.class
 com\teiphu\domain\Tag.class
 com\teiphu\util\Page$PageHolder.class
+com\teiphu\util\SerializeUtil.class
 com\teiphu\service\UserService.class
+com\teiphu\interceptor\MethodCacheInterceptor$1.class
 com\teiphu\domain\Comment.class
 com\teiphu\controller\CategoryController.class
 com\teiphu\mapper\ArticleMapper.class
@@ -25,6 +30,7 @@ com\teiphu\service\CategoryService.class
 com\teiphu\domain\ArticleToTag.class
 com\teiphu\Main.class
 com\teiphu\domain\User.class
+com\teiphu\redis\RedisUtil.class
 com\teiphu\domain\Category.class
 com\teiphu\service\impl\TagServiceImpl.class
 com\teiphu\mapper\UserMapper.class
